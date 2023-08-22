@@ -115,10 +115,10 @@ const docTemplate = `{
 var SwaggerInfo = &swag.Spec{
 	Version:          "1.0",
 	Host:             "localhost:8888",
-	BasePath:         "/api",
+	BasePath:         "/api/v1",
 	Schemes:          []string{},
-	Title:            "Inventory Service API",
-	Description:      "A Inventory service API in Go using Gin framework",
+	Title:            "Brand Service API",
+	Description:      "A Brand service API in Go using Gin framework",
 	InfoInstanceName: "swagger",
 	SwaggerTemplate:  docTemplate,
 	LeftDelim:        "{{",

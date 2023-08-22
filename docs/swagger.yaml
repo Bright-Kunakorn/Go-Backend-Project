@@ -1,4 +1,4 @@
-basePath: /api
+basePath: /api/v1
 definitions:
   golang-crud-gin_pkg_brand_data_response.Response:
     properties:
@@ -19,8 +19,8 @@ definitions:
 host: localhost:8888
 info:
   contact: {}
-  description: A Inventory service API in Go using Gin framework
-  title: Inventory Service API
+  description: A Brand service API in Go using Gin framework
+  title: Brand Service API
   version: "1.0"
 paths:
   /brand:

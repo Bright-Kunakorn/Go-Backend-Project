@@ -20,7 +20,7 @@ import (
 // @description A Brand service API in Go using Gin framework
 
 // @host 	localhost:8888
-// @BasePath /api
+// @BasePath /api/v1
 func main() {
 
 	log.Info().Msg("Started Server!")
@@ -83,7 +83,7 @@ func main() {
 // // @description A Inventory service API in Go using Gin framework
 
 // // @host 	localhost:8888
-// // @BasePath /api
+// // @BasePath /api/v1
 // func main() {
 // 	log.Info().Msg("Started Server!")
 

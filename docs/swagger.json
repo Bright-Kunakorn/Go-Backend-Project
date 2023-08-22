@@ -1,13 +1,13 @@
 {
     "swagger": "2.0",
     "info": {
-        "description": "A Inventory service API in Go using Gin framework",
-        "title": "Inventory Service API",
+        "description": "A Brand service API in Go using Gin framework",
+        "title": "Brand Service API",
         "contact": {},
         "version": "1.0"
     },
     "host": "localhost:8888",
-    "basePath": "/api",
+    "basePath": "/api/v1",
     "paths": {
         "/brand": {
             "get": {
