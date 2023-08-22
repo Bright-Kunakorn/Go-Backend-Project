@@ -4,13 +4,16 @@ import (
 	"log"
 
 	"github.com/gin-gonic/gin"
-	_ "github.com/shall-we-go/go-gin-swagger-example/docs"
-	"github.com/shall-we-go/go-gin-swagger-example/handler"
+	// _ "github.com/shall-we-go/go-gin-swagger-example/docs"
+	brand "github.com/shall-we-go/go-gin-swagger-example/pkgs/brand/handlers"
 	ginSwagger "github.com/swaggo/gin-swagger"
 	"github.com/swaggo/gin-swagger/swaggerFiles"
+	"go.opentelemetry.io/otel"
+	"go.opentelemetry.io/otel/attribute"
+	
 )
 
-// @title Customers API
+// @title Brand API
 // @version 1.0
 // @description.markdown
 // @termsOfService http://somewhere.com/
@@ -30,18 +33,30 @@ import (
 func main() {
 	r := gin.Default()
 
-	r.GET("/healthcheck", handler.HealthCheckHandler)
+
+	r.GET("/healthcheck", brand.HealthCheckHandler)
 
 	v1 := r.Group("/api/v1")
 	{
-		customers := v1.Group("/customers")
+		brands := v1.Group("/brand")
 		{
-			customersHandler := handler.CustomerHandler{}
-			customers.GET(":id", customersHandler.GetCustomer)
-			customers.GET("", customersHandler.ListCustomers)
-			customers.POST("", customersHandler.CreateCustomer)
-			customers.DELETE(":id", customersHandler.DeleteCustomer)
-			customers.PATCH(":id", customersHandler.UpdateCustomer)
+			
+			brandsHandler := brand.BrandsHandler{}
+
+			// Register the GetListBrands handler
+			brands.GET("", func(c *gin.Context) {
+				tr := otel.Tracer("component-route")
+				ctx, span := tr.Start(c.Request.Context(), "/brand")
+				brandsHandler.GetListBrands(ctx, c)
+		
+				span.SetAttributes(
+					attribute.Int("http.status_code", c.Writer.Status()),
+					attribute.String("http.method", c.Request.Method),
+					attribute.String("path", c.Request.URL.Path),
+				)
+				defer span.End()
+			})
+
 		}
 	}
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
