@@ -17,9 +17,9 @@ func NewBrandREpositoryImpl(Db *gorm.DB) BrandRepository {
 	return &BrandRepositoryImpl{Db: Db}
 }
 
-// FindAll implements BrandsRepository
-func (t *BrandsRepositoryImpl) FindAll() []model.Brands {
-	var brand []model.Brands
+// FindAll implements BrandRepository
+func (t *BrandRepositoryImpl) FindAll() []model.Brand {
+	var brand []model.Brand
 	result := t.Db.Find(&brand)
 	helper.ErrorPanic(result.Error)
 	return brand
