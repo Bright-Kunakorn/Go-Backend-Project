@@ -2,18 +2,19 @@ package repository
 
 import (
 	"errors"
+
 	"golang-crud-gin/helper"
 	"golang-crud-gin/pkg/brand/model"
 
 	"gorm.io/gorm"
 )
 
-type BrandsRepositoryImpl struct {
+type BrandRepositoryImpl struct {
 	Db *gorm.DB
 }
 
-func NewBrandsREpositoryImpl(Db *gorm.DB) BrandsRepository {
-	return &BrandsRepositoryImpl{Db: Db}
+func NewBrandREpositoryImpl(Db *gorm.DB) BrandRepository {
+	return &BrandRepositoryImpl{Db: Db}
 }
 
 // FindAll implements BrandsRepository
@@ -24,13 +25,13 @@ func (t *BrandsRepositoryImpl) FindAll() []model.Brands {
 	return brand
 }
 
-// FindById implements BrandsRepository
-func (t *BrandsRepositoryImpl) FindById(brandsId int) (brands model.Brands, err error) {
-	var brand model.Brands
-	result := t.Db.Find(&brand, brandsId)
+// FindById implements BrandRepository
+func (t *BrandRepositoryImpl) FindById(brandId int) (brand model.Brand, err error) {
+	var res model.Brand
+	result := t.Db.Find(&res, brandId)
 	if result != nil {
-		return brand, nil
+		return res, nil
 	} else {
-		return brand, errors.New("brand is not found")
+		return res, errors.New("brand is not found")
 	}
 }

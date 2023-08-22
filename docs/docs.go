@@ -16,10 +16,10 @@ const docTemplate = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
-        "/brands": {
+        "/brand": {
             "get": {
-                "description": "Return list of brands.",
-                "summary": "Get All brands.",
+                "description": "Return list of brand.",
+                "summary": "Get All brand.",
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -30,17 +30,17 @@ const docTemplate = `{
                 }
             }
         },
-        "/brands/{brandId}": {
+        "/brand/{brandId}": {
             "get": {
                 "description": "Return the tahs whoes brandId valu mathes id.",
                 "produces": [
                     "application/json"
                 ],
-                "summary": "Get Single brands by id.",
+                "summary": "Get Single brand by id.",
                 "parameters": [
                     {
                         "type": "string",
-                        "description": "update brands by id",
+                        "description": "update brand by id",
                         "name": "brandId",
                         "in": "path",
                         "required": true
@@ -50,7 +50,33 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/response.Response"
+                            "$ref": "#/definitions/golang-crud-gin_pkg_brand_data_response.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/sku/{skuId}": {
+            "get": {
+                "description": "Return the tahs whoes skuId valu mathes id.",
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "Get Single sku by id.",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "update sku by id",
+                        "name": "skuId",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/golang-crud-gin_pkg_sku_data_response.Response"
                         }
                     }
                 }
@@ -58,7 +84,19 @@ const docTemplate = `{
         }
     },
     "definitions": {
-        "response.Response": {
+        "golang-crud-gin_pkg_brand_data_response.Response": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer"
+                },
+                "data": {},
+                "status": {
+                    "type": "string"
+                }
+            }
+        },
+        "golang-crud-gin_pkg_sku_data_response.Response": {
             "type": "object",
             "properties": {
                 "code": {
@@ -79,8 +117,8 @@ var SwaggerInfo = &swag.Spec{
 	Host:             "localhost:8888",
 	BasePath:         "/api",
 	Schemes:          []string{},
-	Title:            "Brand Service API",
-	Description:      "A Brand service API in Go using Gin framework",
+	Title:            "Inventory Service API",
+	Description:      "A Inventory service API in Go using Gin framework",
 	InfoInstanceName: "swagger",
 	SwaggerTemplate:  docTemplate,
 	LeftDelim:        "{{",

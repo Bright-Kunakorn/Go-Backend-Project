@@ -11,31 +11,31 @@ import (
 	"github.com/rs/zerolog/log"
 )
 
-type BrandsController struct {
-	brandsService service.BrandsService
+type BrandController struct {
+	brandService service.BrandService
 }
 
-func NewBrandsController(service service.BrandsService) *BrandsController {
-	return &BrandsController{
-		brandsService: service,
+func NewBrandController(service service.BrandService) *BrandController {
+	return &BrandController{
+		brandService: service,
 	}
 }
 
-// FindByIdBrands 		godoc
-// @Summary				Get Single brands by id.
-// @Param				brandId path string true "update brands by id"
+// FindByIdBrand 		godoc
+// @Summary				Get Single brand by id.
+// @Param				brandId path string true "update brand by id"
 // @Description			Return the tahs whoes brandId valu mathes id.
 // @Produce				application/json
-// @Brands				brands
+// @Brand				brand
 // @Success				200 {object} response.Response{}
-// @Router				/brands/{brandId} [get]
-func (controller *BrandsController) FindById(ctx *gin.Context) {
-	log.Info().Msg("findbyid brands")
+// @Router				/brand/{brandId} [get]
+func (controller *BrandController) FindById(ctx *gin.Context) {
+	log.Info().Msg("findbyid brand")
 	brandId := ctx.Param("brandId")
 	id, err := strconv.Atoi(brandId)
 	helper.ErrorPanic(err)
 
-	brandResponse := controller.brandsService.FindById(id)
+	brandResponse := controller.brandService.FindById(id)
 
 	webResponse := response.Response{
 		Code:   http.StatusOK,
@@ -46,15 +46,15 @@ func (controller *BrandsController) FindById(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, webResponse)
 }
 
-// FindAllBrands 		godoc
-// @Summary			Get All brands.
-// @Description		Return list of brands.
-// @Brands			brands
+// FindAllBrand 		godoc
+// @Summary			Get All brand.
+// @Description		Return list of brand.
+// @Brand			brand
 // @Success			200 {obejct} response.Response{}
-// @Router			/brands [get]
-func (controller *BrandsController) FindAll(ctx *gin.Context) {
-	log.Info().Msg("findAll brands")
-	brandResponse := controller.brandsService.FindAll()
+// @Router			/brand [get]
+func (controller *BrandController) FindAll(ctx *gin.Context) {
+	log.Info().Msg("findAll brand")
+	brandResponse := controller.brandService.FindAll()
 	webResponse := response.Response{
 		Code:   http.StatusOK,
 		Status: "Ok",

@@ -2,7 +2,7 @@ package service
 
 import "golang-crud-gin/pkg/brand/data/response"
 
-type BrandsService interface {
-	FindById(brandsId int) response.BrandsResponse
-	FindAll() []response.BrandsResponse
+type BrandService interface {
+	FindById(brandId int) response.BrandResponse
+	FindAll() []response.BrandResponse
 }

@@ -8,41 +8,41 @@ import (
 	"github.com/go-playground/validator/v10"
 )
 
-type BrandsServiceImpl struct {
-	BrandsRepository repository.BrandsRepository
-	Validate         *validator.Validate
+type BrandServiceImpl struct {
+	BrandRepository repository.BrandRepository
+	Validate        *validator.Validate
 }
 
-func NewBrandsServiceImpl(brandRepository repository.BrandsRepository, validate *validator.Validate) BrandsService {
-	return &BrandsServiceImpl{
-		BrandsRepository: brandRepository,
-		Validate:         validate,
+func NewBrandServiceImpl(brandRepository repository.BrandRepository, validate *validator.Validate) BrandService {
+	return &BrandServiceImpl{
+		BrandRepository: brandRepository,
+		Validate:        validate,
 	}
 }
 
-// FindAll implements BrandsService
-func (t *BrandsServiceImpl) FindAll() []response.BrandsResponse {
-	result := t.BrandsRepository.FindAll()
+// FindAll implements BrandService
+func (t *BrandServiceImpl) FindAll() []response.BrandResponse {
+	result := t.BrandRepository.FindAll()
 
-	var brands []response.BrandsResponse
+	var res []response.BrandResponse
 	for _, value := range result {
-		brand := response.BrandsResponse{
+		brand := response.BrandResponse{
 			Brandid: value.Brandid,
 			ThBrand: value.ThBrand,
 			EnBrand: value.EnBrand,
 		}
-		brands = append(brands, brand)
+		res = append(res, brand)
 	}
 
-	return brands
+	return res
 }
 
-// FindById implements BrandsService
-func (t *BrandsServiceImpl) FindById(brandsId int) response.BrandsResponse {
-	value, err := t.BrandsRepository.FindById(brandsId)
+// FindById implements BrandService
+func (t *BrandServiceImpl) FindById(brandId int) response.BrandResponse {
+	value, err := t.BrandRepository.FindById(brandId)
 	helper.ErrorPanic(err)
 
-	brandResponse := response.BrandsResponse{
+	brandResponse := response.BrandResponse{
 		Brandid: value.Brandid,
 		ThBrand: value.ThBrand,
 		EnBrand: value.EnBrand,

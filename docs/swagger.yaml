@@ -1,6 +1,14 @@
 basePath: /api
 definitions:
-  response.Response:
+  golang-crud-gin_pkg_brand_data_response.Response:
+    properties:
+      code:
+        type: integer
+      data: {}
+      status:
+        type: string
+    type: object
+  golang-crud-gin_pkg_sku_data_response.Response:
     properties:
       code:
         type: integer
@@ -11,24 +19,24 @@ definitions:
 host: localhost:8888
 info:
   contact: {}
-  description: A Brand service API in Go using Gin framework
-  title: Brand Service API
+  description: A Inventory service API in Go using Gin framework
+  title: Inventory Service API
   version: "1.0"
 paths:
-  /brands:
+  /brand:
     get:
-      description: Return list of brands.
+      description: Return list of brand.
       responses:
         "200":
           description: OK
           schema:
             type: obejct
-      summary: Get All brands.
-  /brands/{brandId}:
+      summary: Get All brand.
+  /brand/{brandId}:
     get:
       description: Return the tahs whoes brandId valu mathes id.
       parameters:
-      - description: update brands by id
+      - description: update brand by id
         in: path
         name: brandId
         required: true
@@ -39,6 +47,23 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/response.Response'
-      summary: Get Single brands by id.
+            $ref: '#/definitions/golang-crud-gin_pkg_brand_data_response.Response'
+      summary: Get Single brand by id.
+  /sku/{skuId}:
+    get:
+      description: Return the tahs whoes skuId valu mathes id.
+      parameters:
+      - description: update sku by id
+        in: path
+        name: skuId
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/golang-crud-gin_pkg_sku_data_response.Response'
+      summary: Get Single sku by id.
 swagger: "2.0"
