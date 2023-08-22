@@ -15,9 +15,9 @@ import (
 	"github.com/rs/zerolog/log"
 )
 
-// @title 	Tag Service API
+// @title 	Brand Service API
 // @version	1.0
-// @description A Tag service API in Go using Gin framework
+// @description A Brand service API in Go using Gin framework
 
 // @host 	localhost:8888
 // @BasePath /api
@@ -28,19 +28,19 @@ func main() {
 	db := config.DatabaseConnection()
 	validate := validator.New()
 
-	db.Table("tags").AutoMigrate(&model.Brands{})
+	db.Table("brands").AutoMigrate(&model.Brands{})
 
 	// Repository
-	tagsRepository := repository.NewBrandsREpositoryImpl(db)
+	brandsRepository := repository.NewBrandsREpositoryImpl(db)
 
 	// Service
-	tagsService := service.NewBrandsServiceImpl(tagsRepository, validate)
+	brandsService := service.NewBrandsServiceImpl(brandsRepository, validate)
 
 	// Controller
-	tagsController := controller.NewBrandsController(tagsService)
+	brandsController := controller.NewBrandsController(brandsService)
 
 	// Router
-	routes := router.NewRouter(tagsController)
+	routes := router.NewRouter(brandsController)
 
 	server := &http.Server{
 		Addr:    ":8888",
