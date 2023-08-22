@@ -28,16 +28,16 @@ func main() {
 	db := config.DatabaseConnection()
 	validate := validator.New()
 
-	db.Table("tags").AutoMigrate(&model.Tags{})
+	db.Table("tags").AutoMigrate(&model.Brands{})
 
 	// Repository
-	tagsRepository := repository.NewTagsREpositoryImpl(db)
+	tagsRepository := repository.NewBrandsREpositoryImpl(db)
 
 	// Service
-	tagsService := service.NewTagsServiceImpl(tagsRepository, validate)
+	tagsService := service.NewBrandsServiceImpl(tagsRepository, validate)
 
 	// Controller
-	tagsController := controller.NewTagsController(tagsService)
+	tagsController := controller.NewBrandsController(tagsService)
 
 	// Router
 	routes := router.NewRouter(tagsController)

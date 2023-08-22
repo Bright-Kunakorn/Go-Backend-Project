@@ -10,10 +10,10 @@ import (
 
 const (
 	host     = "localhost"
-	port     = 5432
-	user     = "postgres"
-	password = "postgres"
-	dbName   = "test"
+	port     = 5433
+	user     = "root"
+	password = "secret"
+	dbName   = "root"
 )
 
 func DatabaseConnection() *gorm.DB {
