@@ -1,9 +1,9 @@
 package controller
 
 import (
-	"golang-crud-gin/data/response"
 	"golang-crud-gin/helper"
-	"golang-crud-gin/service"
+	"golang-crud-gin/pkg/brand/data/response"
+	"golang-crud-gin/pkg/brand/service"
 	"net/http"
 	"strconv"
 

@@ -1,9 +1,9 @@
 package service
 
 import (
-	"golang-crud-gin/data/response"
 	"golang-crud-gin/helper"
-	"golang-crud-gin/repository"
+	"golang-crud-gin/pkg/brand/data/response"
+	"golang-crud-gin/pkg/brand/repository"
 
 	"github.com/go-playground/validator/v10"
 )

@@ -2,13 +2,13 @@ package main
 
 import (
 	"golang-crud-gin/config"
-	"golang-crud-gin/controller"
 	_ "golang-crud-gin/docs"
 	"golang-crud-gin/helper"
-	"golang-crud-gin/model"
-	"golang-crud-gin/repository"
-	"golang-crud-gin/router"
-	"golang-crud-gin/service"
+	"golang-crud-gin/pkg/brand/controller"
+	"golang-crud-gin/pkg/brand/model"
+	"golang-crud-gin/pkg/brand/repository"
+	"golang-crud-gin/pkg/brand/router"
+	"golang-crud-gin/pkg/brand/service"
 	"net/http"
 
 	"github.com/go-playground/validator/v10"
@@ -28,7 +28,7 @@ func main() {
 	db := config.DatabaseConnection()
 	validate := validator.New()
 
-	db.Table("brands").AutoMigrate(&model.Brands{})
+	db.Table("brand").AutoMigrate(&model.Brands{})
 
 	// Repository
 	brandsRepository := repository.NewBrandsREpositoryImpl(db)

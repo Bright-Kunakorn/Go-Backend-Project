@@ -1,8 +1,6 @@
 package service
 
-import (
-	"golang-crud-gin/data/response"
-)
+import "golang-crud-gin/pkg/brand/data/response"
 
 type BrandsService interface {
 	FindById(brandsId int) response.BrandsResponse

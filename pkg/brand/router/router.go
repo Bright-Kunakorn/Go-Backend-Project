@@ -1,8 +1,7 @@
 package router
 
 import (
-	"golang-crud-gin/controller"
-
+	"golang-crud-gin/pkg/brand/controller"
 	"net/http"
 
 	"github.com/gin-gonic/gin"

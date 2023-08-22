@@ -1,6 +1,6 @@
 package repository
 
-import "golang-crud-gin/model"
+import "golang-crud-gin/pkg/brand/model"
 
 type BrandsRepository interface {
 	FindById(brandsId int) (brands model.Brands, err error)

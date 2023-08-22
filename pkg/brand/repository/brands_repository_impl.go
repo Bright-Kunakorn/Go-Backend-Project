@@ -3,7 +3,7 @@ package repository
 import (
 	"errors"
 	"golang-crud-gin/helper"
-	"golang-crud-gin/model"
+	"golang-crud-gin/pkg/brand/model"
 
 	"gorm.io/gorm"
 )
@@ -18,10 +18,10 @@ func NewBrandsREpositoryImpl(Db *gorm.DB) BrandsRepository {
 
 // FindAll implements BrandsRepository
 func (t *BrandsRepositoryImpl) FindAll() []model.Brands {
-	var brands []model.Brands
-	result := t.Db.Find(&brands)
+	var brand []model.Brands
+	result := t.Db.Find(&brand)
 	helper.ErrorPanic(result.Error)
-	return brands
+	return brand
 }
 
 // FindById implements BrandsRepository
