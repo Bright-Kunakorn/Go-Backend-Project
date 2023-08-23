@@ -1,11 +1,12 @@
 package controller
 
 import (
-	"golang-crud-gin/helper"
+	// "golang-crud-gin/helper"
 	"golang-crud-gin/pkg/sku/data/response"
 	"golang-crud-gin/pkg/sku/service"
 	"net/http"
-	"strconv"
+
+	// "strconv"
 
 	"github.com/gin-gonic/gin"
 	"github.com/rs/zerolog/log"
@@ -32,10 +33,10 @@ func NewSkuController(service service.SkuService) *SkuController {
 func (controller *SkuController) FindById(ctx *gin.Context) {
 	log.Info().Msg("findbyid brand")
 	skuId := ctx.Param("skuId")
-	id, err := strconv.Atoi(skuId)
-	helper.ErrorPanic(err)
+	// id, err := strconv.Atoi(skuId)
+	// helper.ErrorPanic(err)
 
-	skuResponse := controller.skuService.FindById(id)
+	skuResponse := controller.skuService.FindById(skuId)
 
 	webResponse := response.Response{
 		Code:   http.StatusOK,

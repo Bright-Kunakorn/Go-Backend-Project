@@ -54,7 +54,7 @@ func (t *SkuServiceImpl) FindAll() []response.SkuResponse {
 }
 
 // FindById implements BrandService
-func (t *SkuServiceImpl) FindById(skuid int) response.SkuResponse {
+func (t *SkuServiceImpl) FindById(skuid string) response.SkuResponse {
 	value, err := t.SkuRepository.FindById(skuid)
 	helper.ErrorPanic(err)
 

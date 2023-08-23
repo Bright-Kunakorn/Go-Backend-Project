@@ -4,11 +4,15 @@ import (
 	"golang-crud-gin/config"
 	_ "golang-crud-gin/docs"
 	"golang-crud-gin/helper"
-	"golang-crud-gin/pkg/brand/controller"
-	"golang-crud-gin/pkg/brand/model"
-	"golang-crud-gin/pkg/brand/repository"
-	"golang-crud-gin/pkg/brand/router"
-	"golang-crud-gin/pkg/brand/service"
+	brandController "golang-crud-gin/pkg/brand/controller"
+	brandModel "golang-crud-gin/pkg/brand/model"
+	brandRepository "golang-crud-gin/pkg/brand/repository"
+	brandService "golang-crud-gin/pkg/brand/service"
+	skuController "golang-crud-gin/pkg/sku/controller"
+	skuModel "golang-crud-gin/pkg/sku/model"
+	skuRepository "golang-crud-gin/pkg/sku/repository"
+	skuService "golang-crud-gin/pkg/sku/service"
+	"golang-crud-gin/router"
 	"net/http"
 
 	"github.com/go-playground/validator/v10"
@@ -28,20 +32,23 @@ func main() {
 	db := config.DatabaseConnection()
 	validate := validator.New()
 
-	db.Table("brand").AutoMigrate(&model.Brand{})
-	// db.Table("sku").AutoMigrate(&model.{})
+	db.Table("brand").AutoMigrate(&brandModel.Brand{})
+	db.Table("sku").AutoMigrate(&skuModel.Sku{})
 
 	// Repository
-	brandRepository := repository.NewBrandREpositoryImpl(db)
+	brandRepository := brandRepository.NewBrandREpositoryImpl(db)
+	skuRepository := skuRepository.NewSkuREpositoryImpl(db)
 
 	// Service
-	brandService := service.NewBrandServiceImpl(brandRepository, validate)
+	brandService := brandService.NewBrandServiceImpl(brandRepository, validate)
+	skuService := skuService.NewSkuServiceImpl(skuRepository, validate)
 
 	// Controller
-	brandController := controller.NewBrandController(brandService)
+	brandController := brandController.NewBrandController(brandService)
+	skuController := skuController.NewSkuController(skuService)
 
 	// Router
-	routes := router.NewRouter(brandController)
+	routes := router.NewRouter(brandController, skuController)
 
 	server := &http.Server{
 		Addr:    ":8888",

@@ -7,10 +7,13 @@ import (
 	"gorm.io/gorm"
 )
 
+var DB *gorm.DB
+var err error
+
 func DatabaseConnection() *gorm.DB {
 	dsn := "postgresql://root:secret@localhost:5433?sslmode=disable"
-	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
+	DB, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
 	helper.ErrorPanic(err)
 
-	return db
+	return DB
 }

@@ -2,7 +2,7 @@ package model
 
 import "time"
 
-type Backendposdatasku struct {
+type Sku struct {
 	Skuid           string    `json:"skuid"`
 	Barcodepos      *string   `json:"barcodepos"`
 	Productname     *string   `json:"productname"`

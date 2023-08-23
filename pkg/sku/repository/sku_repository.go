@@ -3,6 +3,6 @@ package repository
 import "golang-crud-gin/pkg/sku/model"
 
 type SkuRepository interface {
-	FindById(skuId int) (backendposdatasku model.Backendposdatasku, err error)
-	FindAll() []model.Backendposdatasku
+	FindById(skuId string) (Sku model.Sku, err error)
+	FindAll() []model.Sku
 }

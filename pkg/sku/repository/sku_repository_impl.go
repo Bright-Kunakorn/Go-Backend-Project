@@ -14,22 +14,23 @@ type SkuRepositoryImpl struct {
 }
 
 // FindAll implements SkuRepository.
-func (t *SkuRepositoryImpl) FindAll() []model.Backendposdatasku {
-	var sku []model.Backendposdatasku
+func (t *SkuRepositoryImpl) FindAll() []model.Sku {
+	var sku []model.Sku
 	result := t.Db.Find(&sku)
 	helper.ErrorPanic(result.Error)
 	return sku
 }
 
 // FindById implements SkuRepository.
-func (t *SkuRepositoryImpl) FindById(skuId int) (backendposdatasku model.Backendposdatasku, err error) {
-	var sku model.Backendposdatasku
-	result := t.Db.Find(&sku, skuId)
-	if result != nil {
-		return sku, nil
-	} else {
+func (t *SkuRepositoryImpl) FindById(skuId string) (Sku model.Sku, err error) {
+	var sku model.Sku
+	result := t.Db.Where("skuid = ?", skuId).First(&sku)
+	if result.Error != nil {
+		return sku, result.Error
+	} else if result.RowsAffected == 0 {
 		return sku, errors.New("sku is not found")
 	}
+	return sku, nil
 }
 
 func NewSkuREpositoryImpl(Db *gorm.DB) SkuRepository {
