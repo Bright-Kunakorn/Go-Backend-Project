@@ -1,8 +1,10 @@
 package main
 
 import (
+	"context"
 	"golang-crud-gin/config"
 	_ "golang-crud-gin/docs"
+	"golang-crud-gin/exporter"
 	"golang-crud-gin/helper"
 	brandController "golang-crud-gin/pkg/brand/controller"
 	brandModel "golang-crud-gin/pkg/brand/model"
@@ -17,6 +19,7 @@ import (
 
 	"github.com/go-playground/validator/v10"
 	"github.com/rs/zerolog/log"
+	"go.opentelemetry.io/otel"
 )
 
 // @title 	Brand Service API
@@ -26,6 +29,15 @@ import (
 // @host 	localhost:8888
 // @BasePath /api/v1
 func main() {
+	tp, error := exporter.TracerProvider("http://localhost:14268/api/traces")
+	if error != nil {
+		log.Fatal().Err(error).Msg("failed to create tracer provider")
+	}
+	otel.SetTracerProvider(tp)
+
+	tr := tp.Tracer("component-main")
+	_, span := tr.Start(context.Background(), "main")
+	defer span.End()
 
 	log.Info().Msg("Started Server!")
 	// Database
@@ -48,7 +60,7 @@ func main() {
 	skuController := skuController.NewSkuController(skuService)
 
 	// Router
-	routes := router.NewRouter(brandController, skuController)
+	routes := router.NewRouter(brandController, skuController, context.Background())
 
 	server := &http.Server{
 		Addr:    ":8888",

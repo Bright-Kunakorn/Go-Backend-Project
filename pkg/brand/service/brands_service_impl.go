@@ -1,11 +1,15 @@
 package service
 
 import (
+	"context"
 	"golang-crud-gin/helper"
 	"golang-crud-gin/pkg/brand/data/response"
 	"golang-crud-gin/pkg/brand/repository"
+	"time"
 
 	"github.com/go-playground/validator/v10"
+	"go.opentelemetry.io/otel"
+	"go.opentelemetry.io/otel/attribute"
 )
 
 type BrandServiceImpl struct {
@@ -21,8 +25,10 @@ func NewBrandServiceImpl(brandRepository repository.BrandRepository, validate *v
 }
 
 // FindAll implements BrandService
-func (t *BrandServiceImpl) FindAll() []response.BrandResponse {
-	result := t.BrandRepository.FindAll()
+func (t *BrandServiceImpl) FindAll(ctx context.Context) []response.BrandResponse {
+	tr := otel.Tracer("component-service")
+	_, span := tr.Start(ctx, "BrandService FindAll")
+	result := t.BrandRepository.FindAll(ctx)
 
 	var res []response.BrandResponse
 	for _, value := range result {
@@ -33,13 +39,18 @@ func (t *BrandServiceImpl) FindAll() []response.BrandResponse {
 		}
 		res = append(res, brand)
 	}
-
+	span.SetAttributes(
+		attribute.String("StartTime", time.Now().String()),
+	)
+	defer span.End()
 	return res
 }
 
 // FindById implements BrandService
-func (t *BrandServiceImpl) FindById(brandId int) response.BrandResponse {
-	value, err := t.BrandRepository.FindById(brandId)
+func (t *BrandServiceImpl) FindById(brandId int, ctx context.Context) response.BrandResponse {
+	tr := otel.Tracer("component-service")
+	_, span := tr.Start(ctx, "brandService FindAll")
+	value, err := t.BrandRepository.FindById(brandId, ctx)
 	helper.ErrorPanic(err)
 
 	brandResponse := response.BrandResponse{
@@ -47,5 +58,9 @@ func (t *BrandServiceImpl) FindById(brandId int) response.BrandResponse {
 		ThBrand: value.ThBrand,
 		EnBrand: value.EnBrand,
 	}
+	span.SetAttributes(
+		attribute.String("StartTime", time.Now().String()),
+	)
+	defer span.End()
 	return brandResponse
 }

@@ -1,8 +1,11 @@
 package service
 
-import "golang-crud-gin/pkg/brand/data/response"
+import (
+	"context"
+	"golang-crud-gin/pkg/brand/data/response"
+)
 
 type BrandService interface {
-	FindById(brandId int) response.BrandResponse
-	FindAll() []response.BrandResponse
+	FindById(brandId int,ctx context.Context) response.BrandResponse
+	FindAll(ctx context.Context) []response.BrandResponse
 }
