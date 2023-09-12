@@ -19,7 +19,7 @@ func NewRouter(brandController *brandController.BrandController, skuController *
 	_, span := tr.Start(ctx, "Router")
 	router := gin.Default()
 	// Add swagger
-	router.GET("/docs/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
+	router.GET("api/v1/docs/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 
 	router.GET("", func(ctx *gin.Context) {
 		ctx.JSON(http.StatusOK, "welcome home")
