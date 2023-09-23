@@ -41,6 +41,8 @@ func (controller *BrandController) FindById(ctx *gin.Context) {
 	id, err := strconv.Atoi(brandId)
 	helper.ErrorPanic(err)
 
+
+	
 	brandResponse := controller.brandService.FindById(id, ctxWithTrace)
 
 	webResponse := response.Response{
