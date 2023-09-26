@@ -110,6 +110,7 @@ require (
 	github.com/swaggo/swag v1.16.1
 	github.com/twitchyliquid64/golang-asm v0.15.1 // indirect
 	github.com/ugorji/go/codec v1.2.11 // indirect
+	go.elastic.co/apm/module/apmhttp v1.15.0
 	go.opentelemetry.io/otel/sdk v1.16.0
 	golang.org/x/arch v0.4.0 // indirect
 	golang.org/x/crypto v0.12.0 // indirect
