@@ -20,8 +20,7 @@ import (
 	"github.com/go-playground/validator/v10"
 	"github.com/rs/zerolog/log"
 	"go.opentelemetry.io/otel"
-
-	"go.elastic.co/apm/module/apmhttp"
+	// "go.elastic.co/apm/module/apmhttp"
 )
 
 // @title 	Brand Service API
@@ -31,7 +30,7 @@ import (
 // @host 	localhost:8888
 // @BasePath /api/v1
 func main() {
-	mux := http.NewServeMux()
+	// mux := http.NewServeMux()
 
 	tp, error := exporter.TracerProvider("http://localhost:14268/api/traces")
 	if error != nil {
@@ -74,7 +73,7 @@ func main() {
 	err := server.ListenAndServe()
 	helper.ErrorPanic(err)
 
-	http.ListenAndServe(":8080", apmhttp.Wrap(mux))
+	// http.ListenAndServe(":8080", apmhttp.Wrap(mux))
 }
 
 // package main
