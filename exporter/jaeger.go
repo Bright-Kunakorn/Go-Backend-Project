@@ -35,3 +35,6 @@ func TracerProvider(url string) (*trace.TracerProvider, error) {
 	)
 	return tp, nil
 }
+
+
+
