@@ -23,6 +23,11 @@ func NewBrandController(service service.BrandService) *BrandController {
 		brandService: service,
 	}
 }
+
+
+
+
+
 // FindByIdBrand 		godoc
 // @Summary				Get Single brand by id.
 // @Param				brandId path string true "update brand by id"
