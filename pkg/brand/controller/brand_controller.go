@@ -24,6 +24,31 @@ func NewBrandController(service service.BrandService) *BrandController {
 	}
 }
 
+// func (r CustomerRepository) UpdateCustomerInfo(supplierId string, customerInfo customermodel.CustomerInfoResponse) error {
+//     ctx, cancel := r.withTimeout()
+//     defer cancel()
+
+//     if err := r.Database.WithContext(ctx).
+//         Table(model.TableNameContract).
+//         Joins("JOIN " + model.TableNameCustomer + " ON " + model.TableNameContract + ".customer_id = " + model.TableNameCustomer + ".id").
+//         Where(model.TableNameContract+".customer_id = ? AND "+model.TableNameContract+".supplier_id = ?", customerInfo.CustomerId, supplierId).
+//         Updates(map[string]interface{}{
+//             model.TableNameContract + ".price_tier_group_id": customerInfo.PriceTierGroupId,
+//             model.TableNameCustomer + ".name":              customerInfo.Name,
+//             model.TableNameCustomer + ".phone_1":          customerInfo.Phone1,
+//             model.TableNameCustomer + ".phone_2":          customerInfo.Phone2,
+//             model.TableNameContract + ".updated_by":       customerInfo.UpdatedBy,
+//             model.TableNameCustomer + ".updated_by":       customerInfo.UpdatedBy,
+//             model.TableNameContract + ".updated_date":     customerInfo.UpdatedDate,
+//             model.TableNameCustomer + ".updated_date":     customerInfo.UpdatedDate,
+//         }).
+//         Error; err != nil {
+//         return err
+//     }
+
+//     return nil
+// }
+
 // FindByIdBrand 		godoc
 // @Summary				Get Single brand by id.
 // @Param				brandId path string true "update brand by id"
@@ -41,8 +66,6 @@ func (controller *BrandController) FindById(ctx *gin.Context) {
 	id, err := strconv.Atoi(brandId)
 	helper.ErrorPanic(err)
 
-
-	
 	brandResponse := controller.brandService.FindById(id, ctxWithTrace)
 
 	webResponse := response.Response{
@@ -64,7 +87,6 @@ func (controller *BrandController) FindById(ctx *gin.Context) {
 	ctx.Header("Content-Type", "application/json")
 	ctx.JSON(http.StatusOK, webResponse)
 }
-
 
 // FindAllBrand 	godoc
 // @Summary			Get All brand.
