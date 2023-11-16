@@ -23,10 +23,6 @@ func NewBrandController(service service.BrandService) *BrandController {
 		brandService: service,
 	}
 }
-
-
-
-
 // func (r CustomerRepository) UpdateCustomerInfo(supplierId string, customerInfo customermodel.CustomerInfoResponse) error {
 //     ctx, cancel := r.withTimeout()
 //     defer cancel()
