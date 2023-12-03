@@ -24,6 +24,7 @@ func NewBrandController(service service.BrandService) *BrandController {
 	}
 }
 
+
 // func (r CustomerRepository) UpdateCustomerInfo(supplierId string, customerInfo customermodel.CustomerInfoResponse) error {
 //     ctx, cancel := r.withTimeout()
 //     defer cancel()
@@ -87,6 +88,7 @@ func (controller *BrandController) FindById(ctx *gin.Context) {
 	ctx.Header("Content-Type", "application/json")
 	ctx.JSON(http.StatusOK, webResponse)
 }
+
 
 // FindAllBrand 	godoc
 // @Summary			Get All brand.
