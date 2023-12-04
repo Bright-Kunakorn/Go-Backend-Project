@@ -90,6 +90,10 @@ func (controller *BrandController) FindById(ctx *gin.Context) {
 }
 
 
+
+
+
+
 // FindAllBrand 	godoc
 // @Summary			Get All brand.
 // @Description		Return list of brand.
