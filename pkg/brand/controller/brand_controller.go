@@ -88,6 +88,9 @@ func (controller *BrandController) FindById(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, webResponse)
 }
 
+
+
+
 // FindAllBrand 	godoc
 // @Summary			Get All brand.
 // @Description		Return list of brand.
